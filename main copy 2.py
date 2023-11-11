@@ -73,22 +73,23 @@ def save_row(row, cursor):
     for item, config in conf.items():
         print(f"processando {item}")
         if config.get("id") in row:
+            print(f"validou")
+
             for table in config.get("tables", []):
 
-                dicta = row.asDict([True])
-                for item in table.get("source_keys", []):
-                    dicta[item]
-
                 cliente = [(row.__getitem__("objt_clie").__getitem__("nom_tipo_docm"))]
-                               
-                columns = [row.__getitem__("objt_clie").__getitem__("objt_tel_clie").__getitem__(f"{i}") for i in table["fields"]]
-                colum_update = [f"""{i}='{row.__getitem__("objt_clie").__getitem__("objt_tel_clie").__getitem__(f"{i}")}'""" for i in table["fields"]]
+                
+                tel = ["cod_tel_clie", "cod_area_tel", "cod_pais_tel", "num_tel_clie"]
+                externalid = ["cliente"]
+                key = ["num_tel_clie", "cliente"]  
+                columns = [row.__getitem__("objt_clie").__getitem__("objt_tel_clie").__getitem__(f"{i}") for i in tel]
+                colum_update = [f"""{i}='{row.__getitem__("objt_clie").__getitem__("objt_tel_clie").__getitem__(f"{i}")}'""" for i in tel]
 
 
                 slq_statement = f"""
-                        INSERT INTO {table["name"]} ({", ".join(table["fields"] + table.get("external_keys", []))})
+                        INSERT INTO public.tel_clie ({", ".join(tel + externalid)})
                         VALUES ('{"','".join(columns + cliente)}')
-                        ON CONFLICT ({",".join(table["table_pk"])})
+                        ON CONFLICT ({",".join(key)})
                         DO
                         UPDATE SET {",".join(colum_update)}
                     """

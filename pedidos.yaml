@@ -1,0 +1,20 @@
+pedidos: 
+  id: txt_detl_idt_pedi_pgto
+  tables:
+    - name: public.tel_clie
+      source_keys:
+        - objt_clie
+          - objt_tel_clie
+      external_keys:
+        - cliente
+      external_source_values:
+        - objt_clie
+          - nom_tipo_docm
+      table_pk: 
+        - num_tel_clie
+        - cliente
+      fields: 
+        - cod_tel_clie
+        - cod_area_tel
+        - cod_pais_tel
+        - num_tel_clie
