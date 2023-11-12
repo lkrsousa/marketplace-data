@@ -67,6 +67,13 @@ def load_Conf():
         conf = yaml.safe_load(f)
         return conf
 
+def get_item(row, key):
+    if len(key) == 1:
+        return row[f"{key[0]}"]
+    else:
+        return row[f"{key[0]}"][f"{key[1]}"]
+
+
 def save_row(row, cursor):
     conf = load_Conf()
 
@@ -76,18 +83,17 @@ def save_row(row, cursor):
             for table in config.get("tables", []):
 
                 dicta = row.asDict([True])
-                for item in table.get("source_keys", []):
-                    dicta[item]
-
-                cliente = [(row.__getitem__("objt_clie").__getitem__("nom_tipo_docm"))]
-                               
-                columns = [row.__getitem__("objt_clie").__getitem__("objt_tel_clie").__getitem__(f"{i}") for i in table["fields"]]
-                colum_update = [f"""{i}='{row.__getitem__("objt_clie").__getitem__("objt_tel_clie").__getitem__(f"{i}")}'""" for i in table["fields"]]
+                
+                data = get_item(dicta, table.get("source_keys", []) )
+                data2 = [get_item(dicta, table.get("external_source_values", []) )]
+                              
+                columns = [data.__getitem__(f"{i}") for i in table["fields"]]
+                colum_update = [f"""{i}='{data.__getitem__(f"{i}")}'""" for i in table["fields"]]
 
 
                 slq_statement = f"""
                         INSERT INTO {table["name"]} ({", ".join(table["fields"] + table.get("external_keys", []))})
-                        VALUES ('{"','".join(columns + cliente)}')
+                        VALUES ('{"','".join(columns + data2)}')
                         ON CONFLICT ({",".join(table["table_pk"])})
                         DO
                         UPDATE SET {",".join(colum_update)}

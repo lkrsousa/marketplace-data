@@ -4,12 +4,12 @@ pedidos:
     - name: public.tel_clie
       source_keys:
         - objt_clie
-          - objt_tel_clie
+        - objt_tel_clie
       external_keys:
         - cliente
       external_source_values:
         - objt_clie
-          - nom_tipo_docm
+        - nom_tipo_docm
       table_pk: 
         - num_tel_clie
         - cliente
