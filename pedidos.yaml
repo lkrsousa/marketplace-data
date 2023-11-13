@@ -82,9 +82,11 @@ pedidos:
         - num_item
         - qtd_maxi_temp_envo
         - vlr_desc_conc_pedi
+        - vlr_totl_pedi
         - vlr_totl_desc
         - vlr_cust_totl_envo
-        - vlr_desc_totl_envo        
+        - vlr_desc_totl_envo  
+        - vlr_fina_pedi      
     - name: public.items
       source_keys:
         - list_item_pedi
@@ -117,3 +119,32 @@ pedidos:
         - nom_url_img_oril
         - vlr_oril_prod_unit_vrne
         - vlr_prec_unit_brut
+    - name: public.promo
+      source_keys:
+        - list_prmo
+      external_keys:
+        - pedido
+      external_source_values:
+        - txt_detl_idt_pedi_pgto
+      table_pk: 
+        - cod_prmo
+      fields: 
+        - nom_apli_prmo
+        - cod_prmo
+        - nom_prmo
+        - nom_tipo_desc
+        - vlr_cnfg_desc
+        - vlr_aplc_desc
+    # - name: public.cupom
+      # source_keys:
+      #   - list_prmo
+      # external_keys:
+      #   - promo
+      # external_source_values:
+      #   - cod_prmo
+      # table_pk: 
+      #   - cod_idef_cupo
+      # fields: 
+      #   - cod_idef_cupo
+      #   - nom_tipo_cupo
+      #   - cod_cupo       
