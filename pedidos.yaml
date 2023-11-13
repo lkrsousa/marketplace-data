@@ -85,35 +85,35 @@ pedidos:
         - vlr_totl_desc
         - vlr_cust_totl_envo
         - vlr_desc_totl_envo        
-    # - name: public.items
-      # source_keys:
-      #   - list_item_pedi
-      # external_keys:
-      #   - pedido
-      # external_source_values:
-      #   - txt_detl_idt_pedi_pgto
-      # table_pk: 
-      #   - id_item
-      # fields: 
-      #   - des_moda_entg_item
-      #   - qtd_dia_prz_entg
-      #   - vlr_totl_fret
-      #   - nom_oped_empr
-      #   - nom_item
-      #   - cod_ofrt_ineo_requ
-      #   - vlr_oril
-      #   - vlr_prod
-      #   - vlr_prod_ofrt_desc
-      #   - nom_prod_orig
-      #   - txt_plae_otmz_url_prod
-      #   - qtd_item_pedi
-      #   - idt_venr
-      #   - nom_venr
-      #   - idt_vrne_venr
-      #   - vlr_fret
-      #   - vlr_desc_envo
-      #   - cod_vrne_prod
-      #   - txt_plae_otmz_url_item
-      #   - nom_url_img_oril
-      #   - vlr_oril_prod_unit_vrne
-      #   - vlr_prec_unit_brut
+    - name: public.items
+      source_keys:
+        - list_item_pedi
+      external_keys:
+        - pedido
+      external_source_values:
+        - txt_detl_idt_pedi_pgto
+      table_pk: 
+        - id_item
+      fields: 
+        - des_moda_entg_item
+        - qtd_dia_prz_entg
+        - vlr_totl_fret
+        - nom_oped_empr
+        - nom_item
+        - cod_ofrt_ineo_requ
+        - vlr_oril
+        - vlr_prod
+        - vlr_prod_ofrt_desc
+        - nom_prod_orig
+        - txt_plae_otmz_url_prod
+        - qtd_item_pedi
+        - idt_venr
+        - nom_venr
+        - idt_vrne_venr
+        - vlr_fret
+        - vlr_desc_envo
+        - cod_vrne_prod
+        - txt_plae_otmz_url_item
+        - nom_url_img_oril
+        - vlr_oril_prod_unit_vrne
+        - vlr_prec_unit_brut

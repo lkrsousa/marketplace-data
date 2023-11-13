@@ -51,9 +51,9 @@ from pyspark.sql import types as T
 
 prop = {
     "driver": "org.postgresql.Driver",
-    "host": "teste1.cxhbqq8ci3yq.us-east-1.rds.amazonaws.com",
-    "database":"teste_db",
-    "user": "teste",
+    "host": "testem.cxhbqq8ci3yq.us-east-1.rds.amazonaws.com",
+    "database":"testem",
+    "user": "testem",
     "password": "teste123",
 }
 
@@ -73,6 +73,15 @@ def get_item(row, key):
     else:
         return row[f"{key[0]}"][f"{key[1]}"]
 
+def get_key(object: any, key: str):
+    from collections.abc import Iterable
+    
+    data = get_item(object, key)
+    if isinstance(data, dict):
+        return [data]
+    elif isinstance(data, Iterable):
+        return data
+
 
 def save_row(row, cursor):
     conf = load_Conf()
@@ -86,20 +95,17 @@ def save_row(row, cursor):
                 dicta = row.asDict([True])
                 
                 source = table.get("source_keys", [])
-                data = get_item(dicta, source) if source else dicta
+                data = get_key(dicta, source) if source else [dicta]
 
                 external = table.get("external_source_values", [])
                 data2 = [get_item(dicta, external)] if external else []
 
                 external_update = [f"""{i}='{data2[0]}'""" for i in table.get("external_keys", [])]
-
-                for item in [data]:
-                    print(item)
+                for item in data:
                               
-                    columns = [data.__getitem__(f"{i}") for i in table["fields"]]
-                    colum_update = [f"""{i}='{data.__getitem__(f"{i}")}'""" for i in table["fields"]]
-
-
+                    columns = [f'{item.get(f"{i}", None)}' for i in table["fields"]]
+                    colum_update = [f"""{i}='{item.get(f"{i}", None)}'""" for i in table["fields"]]
+                    
                     slq_statement = f"""
                             INSERT INTO {table["name"]} ({", ".join(table["fields"] + table.get("external_keys", []))})
                             VALUES ('{"','".join(columns + data2)}')
@@ -107,7 +113,7 @@ def save_row(row, cursor):
                             DO
                             UPDATE SET {",".join(colum_update + external_update)}
                         """
-
+                    
                     cursor.execute(slq_statement)
 
 def save_data(partition):
