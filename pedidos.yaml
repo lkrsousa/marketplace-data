@@ -1,6 +1,17 @@
 pedidos: 
   id: txt_detl_idt_pedi_pgto
   tables:
+    - name: public.cliente
+      source_keys:
+        - objt_clie
+      table_pk: 
+        - nom_tipo_docm
+      fields: 
+        - nom_tipo_docm
+        - nom_ende_emai_clie
+        - nom_clie
+        - cod_rfrc_clie
+        - cod_tipo_pess
     - name: public.tel_clie
       source_keys:
         - objt_clie
@@ -17,4 +28,92 @@ pedidos:
         - cod_tel_clie
         - cod_area_tel
         - cod_pais_tel
-        - num_tel_clie
+        - num_tel_clie        
+    - name: public.endereco
+      source_keys:
+        - objt_ende_entg_pedi
+      external_keys:
+        - cliente
+      external_source_values:
+        - objt_clie
+        - nom_tipo_docm
+      table_pk: 
+        - cod_cep
+        - cliente
+      fields: 
+        - nom_cida_ende_entg
+        - nom_cmpl_ende_entg
+        - cod_pais_resd
+        - nom_bair_ende_entg
+        - num_logr_ende_entg
+        - nom_pess
+        - sig_uf
+        - nom_estd
+        - nom_logr_ende_entg
+        - cod_cep
+    - name: public.pedidos
+      external_keys:
+        - cliente
+      external_source_values:
+        - objt_clie
+        - nom_tipo_docm
+      table_pk: 
+        - txt_detl_idt_pedi_pgto
+      fields:
+        - cod_aces_tokn
+        - cod_idef_clie
+        - dat_atui
+        - dat_hor_tran
+        - idt_loja
+        - num_ulti_vers_sist
+        - stat_pedi
+        - stat_pgto
+        - txt_detl_idt_pedi_pgto
+    - name: public.resumo
+      source_keys:
+        - objt_des_rsum
+      external_keys:
+        - pedido
+      external_source_values:
+        - txt_detl_idt_pedi_pgto
+      table_pk:
+        - id_resumo
+      fields: 
+        - num_item
+        - qtd_maxi_temp_envo
+        - vlr_desc_conc_pedi
+        - vlr_totl_desc
+        - vlr_cust_totl_envo
+        - vlr_desc_totl_envo        
+    # - name: public.items
+      # source_keys:
+      #   - list_item_pedi
+      # external_keys:
+      #   - pedido
+      # external_source_values:
+      #   - txt_detl_idt_pedi_pgto
+      # table_pk: 
+      #   - id_item
+      # fields: 
+      #   - des_moda_entg_item
+      #   - qtd_dia_prz_entg
+      #   - vlr_totl_fret
+      #   - nom_oped_empr
+      #   - nom_item
+      #   - cod_ofrt_ineo_requ
+      #   - vlr_oril
+      #   - vlr_prod
+      #   - vlr_prod_ofrt_desc
+      #   - nom_prod_orig
+      #   - txt_plae_otmz_url_prod
+      #   - qtd_item_pedi
+      #   - idt_venr
+      #   - nom_venr
+      #   - idt_vrne_venr
+      #   - vlr_fret
+      #   - vlr_desc_envo
+      #   - cod_vrne_prod
+      #   - txt_plae_otmz_url_item
+      #   - nom_url_img_oril
+      #   - vlr_oril_prod_unit_vrne
+      #   - vlr_prec_unit_brut

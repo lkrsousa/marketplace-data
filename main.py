@@ -51,8 +51,8 @@ from pyspark.sql import types as T
 
 prop = {
     "driver": "org.postgresql.Driver",
-    "host": "teste.cxhbqq8ci3yq.us-east-1.rds.amazonaws.com",
-    "database":"db_teste",
+    "host": "teste1.cxhbqq8ci3yq.us-east-1.rds.amazonaws.com",
+    "database":"teste_db",
     "user": "teste",
     "password": "teste123",
 }
@@ -81,25 +81,34 @@ def save_row(row, cursor):
         print(f"processando {item}")
         if config.get("id") in row:
             for table in config.get("tables", []):
+                print(f"salvando dados de {table['name']}")
 
                 dicta = row.asDict([True])
                 
-                data = get_item(dicta, table.get("source_keys", []) )
-                data2 = [get_item(dicta, table.get("external_source_values", []) )]
+                source = table.get("source_keys", [])
+                data = get_item(dicta, source) if source else dicta
+
+                external = table.get("external_source_values", [])
+                data2 = [get_item(dicta, external)] if external else []
+
+                external_update = [f"""{i}='{data2[0]}'""" for i in table.get("external_keys", [])]
+
+                for item in [data]:
+                    print(item)
                               
-                columns = [data.__getitem__(f"{i}") for i in table["fields"]]
-                colum_update = [f"""{i}='{data.__getitem__(f"{i}")}'""" for i in table["fields"]]
+                    columns = [data.__getitem__(f"{i}") for i in table["fields"]]
+                    colum_update = [f"""{i}='{data.__getitem__(f"{i}")}'""" for i in table["fields"]]
 
 
-                slq_statement = f"""
-                        INSERT INTO {table["name"]} ({", ".join(table["fields"] + table.get("external_keys", []))})
-                        VALUES ('{"','".join(columns + data2)}')
-                        ON CONFLICT ({",".join(table["table_pk"])})
-                        DO
-                        UPDATE SET {",".join(colum_update)}
-                    """
-                
-                cursor.execute(slq_statement)
+                    slq_statement = f"""
+                            INSERT INTO {table["name"]} ({", ".join(table["fields"] + table.get("external_keys", []))})
+                            VALUES ('{"','".join(columns + data2)}')
+                            ON CONFLICT ({",".join(table["table_pk"])})
+                            DO
+                            UPDATE SET {",".join(colum_update + external_update)}
+                        """
+
+                    cursor.execute(slq_statement)
 
 def save_data(partition):
     conn = connect.value
