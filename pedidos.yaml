@@ -136,15 +136,16 @@ pedidos:
         - vlr_cnfg_desc
         - vlr_aplc_desc
     # - name: public.cupom
-      # source_keys:
-      #   - list_prmo
-      # external_keys:
-      #   - promo
-      # external_source_values:
-      #   - cod_prmo
-      # table_pk: 
-      #   - cod_idef_cupo
-      # fields: 
-      #   - cod_idef_cupo
-      #   - nom_tipo_cupo
-      #   - cod_cupo       
+    #   source_keys:
+    #     - list_prmo
+    #     - objt_cupo
+    #   external_keys:
+    #     - promo
+    #   external_source_values:
+    #     - cod_prmo
+    #   table_pk: 
+    #     - cod_idef_cupo
+    #   fields: 
+    #     - cod_idef_cupo
+    #     - nom_tipo_cupo
+    #     - cod_cupo       

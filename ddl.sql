@@ -146,3 +146,37 @@ CREATE TABLE public.tel_clie (
 -- public.tel_clie foreign keys
 
 ALTER TABLE public.tel_clie ADD CONSTRAINT tel_clie_fk FOREIGN KEY (cliente) REFERENCES public.cliente(nom_tipo_docm);
+
+-- public.promo definition
+
+-- Drop table
+
+-- DROP TABLE public.promo;
+
+CREATE TABLE public.promo (
+	nom_apli_prmo varchar NULL,
+	cod_prmo varchar NOT NULL,
+	nom_prmo varchar NULL,
+	nom_tipo_desc varchar NULL,
+	vlr_cnfg_desc varchar NULL,
+	vlr_aplc_desc varchar NULL,
+	pedido varchar NULL,
+	CONSTRAINT promo_pk PRIMARY KEY (cod_prmo)
+);
+
+
+-- public.promo foreign keys
+
+ALTER TABLE public.promo ADD CONSTRAINT promo_fk FOREIGN KEY (pedido) REFERENCES public.pedidos(txt_detl_idt_pedi_pgto);
+
+-- public.cupom definition
+
+-- Drop table
+
+-- DROP TABLE public.cupom;
+
+CREATE TABLE public.cupom (
+	cod_idef_cupo varchar NULL,
+	nom_tipo_cupo varchar NULL,
+	cod_cupo varchar NULL
+);

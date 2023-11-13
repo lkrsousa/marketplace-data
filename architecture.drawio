@@ -1,47 +1,37 @@
 <mxfile host="65bd71144e">
     <diagram id="7u0tjs2_i5mqCkMGg-q6" name="Page-1">
-        <mxGraphModel dx="902" dy="488" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="862" dy="488" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="685" value="AWS Cloud" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=0;container=1;pointerEvents=0;collapsible=0;recursiveResize=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_aws_cloud_alt;strokeColor=#232F3E;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#232F3E;dashed=0;" vertex="1" parent="1">
+                <mxCell id="685" value="AWS Cloud" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=0;container=1;pointerEvents=0;collapsible=0;recursiveResize=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_aws_cloud_alt;strokeColor=#232F3E;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#232F3E;dashed=0;" parent="1" vertex="1">
                     <mxGeometry x="10" y="10" width="830" height="480" as="geometry"/>
                 </mxCell>
-                <mxCell id="691" style="edgeStyle=none;html=1;" edge="1" parent="685" source="686" target="690">
+                <mxCell id="691" style="edgeStyle=none;html=1;" parent="685" source="686" target="690" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="686" value="Amazon S3" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=#ffffff;fillColor=#232F3E;dashed=0;verticalLabelPosition=middle;verticalAlign=bottom;align=center;html=1;whiteSpace=wrap;fontSize=10;fontStyle=1;spacing=3;shape=mxgraph.aws4.productIcon;prIcon=mxgraph.aws4.s3;" vertex="1" parent="685">
+                <mxCell id="686" value="Amazon S3" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=#ffffff;fillColor=#232F3E;dashed=0;verticalLabelPosition=middle;verticalAlign=bottom;align=center;html=1;whiteSpace=wrap;fontSize=10;fontStyle=1;spacing=3;shape=mxgraph.aws4.productIcon;prIcon=mxgraph.aws4.s3;" parent="685" vertex="1">
                     <mxGeometry x="200" y="90" width="80" height="100" as="geometry"/>
                 </mxCell>
-                <mxCell id="689" style="edgeStyle=none;html=1;" edge="1" parent="685" source="687" target="686">
+                <mxCell id="689" style="edgeStyle=none;html=1;" parent="685" source="687" target="686" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="687" value="Marketplace&lt;br&gt;" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.marketplace;" vertex="1" parent="685">
+                <mxCell id="687" value="Marketplace&lt;br&gt;" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.marketplace;" parent="685" vertex="1">
                     <mxGeometry x="30" y="101" width="78" height="78" as="geometry"/>
                 </mxCell>
-                <mxCell id="693" style="edgeStyle=none;html=1;" edge="1" parent="685" source="690" target="692">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="690" value="Amazon EMR" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=#ffffff;fillColor=#232F3E;dashed=0;verticalLabelPosition=middle;verticalAlign=bottom;align=center;html=1;whiteSpace=wrap;fontSize=10;fontStyle=1;spacing=3;shape=mxgraph.aws4.productIcon;prIcon=mxgraph.aws4.emr;" vertex="1" parent="685">
-                    <mxGeometry x="320" y="30" width="80" height="100" as="geometry"/>
-                </mxCell>
-                <mxCell id="692" value="Amazon Redshift" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=#ffffff;fillColor=#232F3E;dashed=0;verticalLabelPosition=middle;verticalAlign=bottom;align=center;html=1;whiteSpace=wrap;fontSize=10;fontStyle=1;spacing=3;shape=mxgraph.aws4.productIcon;prIcon=mxgraph.aws4.redshift;" vertex="1" parent="685">
-                    <mxGeometry x="540" y="70" width="80" height="110" as="geometry"/>
-                </mxCell>
-                <mxCell id="694" value="Amazon S3" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=#ffffff;fillColor=#232F3E;dashed=0;verticalLabelPosition=middle;verticalAlign=bottom;align=center;html=1;whiteSpace=wrap;fontSize=10;fontStyle=1;spacing=3;shape=mxgraph.aws4.productIcon;prIcon=mxgraph.aws4.s3;" vertex="1" parent="685">
-                    <mxGeometry x="540" y="200" width="80" height="100" as="geometry"/>
-                </mxCell>
-                <mxCell id="695" value="Landing zone" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="685">
-                    <mxGeometry x="210" y="192" width="60" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="697" style="edgeStyle=none;html=1;" edge="1" parent="685" source="690" target="694">
+                <mxCell id="693" style="edgeStyle=none;html=1;" parent="685" source="690" edge="1">
                     <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="410" y="98.18181818181824" as="sourcePoint"/>
-                        <mxPoint x="550" y="126.81818181818187" as="targetPoint"/>
+                        <mxPoint x="540" y="116.81818181818187" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="699" value="Raw" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="685">
-                    <mxGeometry x="550" y="300" width="60" height="30" as="geometry"/>
+                <mxCell id="690" value="Amazon EMR" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=#ffffff;fillColor=#232F3E;dashed=0;verticalLabelPosition=middle;verticalAlign=bottom;align=center;html=1;whiteSpace=wrap;fontSize=10;fontStyle=1;spacing=3;shape=mxgraph.aws4.productIcon;prIcon=mxgraph.aws4.emr;" parent="685" vertex="1">
+                    <mxGeometry x="320" y="30" width="80" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="695" value="Landing zone" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="685" vertex="1">
+                    <mxGeometry x="210" y="192" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="699" value="Amazon RDS" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=#ffffff;fillColor=#232F3E;dashed=0;verticalLabelPosition=middle;verticalAlign=bottom;align=center;html=1;whiteSpace=wrap;fontSize=10;fontStyle=1;spacing=3;shape=mxgraph.aws4.productIcon;prIcon=mxgraph.aws4.rds;" vertex="1" parent="685">
+                    <mxGeometry x="540" y="70" width="80" height="100" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

@@ -51,21 +51,21 @@ from pyspark.sql import types as T
 
 prop = {
     "driver": "org.postgresql.Driver",
-    "host": "testem.cxhbqq8ci3yq.us-east-1.rds.amazonaws.com",
-    "database":"testem",
+    "host": "host.us-east-1.rds.amazonaws.com",
+    "database": "testem",
     "user": "testem",
     "password": "teste123",
 }
 
 connect = sc.broadcast(prop)
 
+
 def load_Conf():
-    file_path = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), "pedidos.yaml"
-        )
+    file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "pedidos.yaml")
     with open(file_path, "r") as f:
         conf = yaml.safe_load(f)
         return conf
+
 
 def get_item(row, key):
     if len(key) == 1:
@@ -73,9 +73,10 @@ def get_item(row, key):
     else:
         return row[f"{key[0]}"][f"{key[1]}"]
 
+
 def get_key(object: any, key: str):
     from collections.abc import Iterable
-    
+
     data = get_item(object, key)
     if isinstance(data, dict):
         return [data]
@@ -90,40 +91,48 @@ def save_row(row, cursor):
         print(f"processando {item}")
         if config.get("id") in row:
             for table in config.get("tables", []):
-                print(f"salvando dados de {table['name']}")
 
                 dicta = row.asDict([True])
-                
+
                 source = table.get("source_keys", [])
-                data = get_key(dicta, source) if source else [dicta]
 
-                external = table.get("external_source_values", [])
-                data2 = [get_item(dicta, external)] if external else []
+                if source and source[0] in dicta.keys():
+                    print(f"salvando dados de {table['name']}")
+                    data = get_key(dicta, source) if source else [dicta]
 
-                external_update = [f"""{i}='{data2[0]}'""" for i in table.get("external_keys", [])]
-                for item in data:
-                              
-                    columns = [f'{item.get(f"{i}", None)}' for i in table["fields"]]
-                    colum_update = [f"""{i}='{item.get(f"{i}", None)}'""" for i in table["fields"]]
-                    
-                    slq_statement = f"""
-                            INSERT INTO {table["name"]} ({", ".join(table["fields"] + table.get("external_keys", []))})
-                            VALUES ('{"','".join(columns + data2)}')
-                            ON CONFLICT ({",".join(table["table_pk"])})
-                            DO
-                            UPDATE SET {",".join(colum_update + external_update)}
-                        """
-                    
-                    cursor.execute(slq_statement)
+                    external = table.get("external_source_values", [])
+                    data2 = [get_item(dicta, external)] if external else []
+
+                    external_update = [
+                        f"""{i}='{data2[0]}'""" for i in table.get("external_keys", [])
+                    ]
+                    for item in data:
+
+                        columns = [f'{item.get(f"{i}", None)}' for i in table["fields"]]
+                        colum_update = [
+                            f"""{i}='{item.get(f"{i}", None)}'"""
+                            for i in table["fields"]
+                        ]
+
+                        slq_statement = f"""
+                                INSERT INTO {table["name"]} ({", ".join(table["fields"] + table.get("external_keys", []))})
+                                VALUES ('{"','".join(columns + data2)}')
+                                ON CONFLICT ({",".join(table["table_pk"])})
+                                DO
+                                UPDATE SET {",".join(colum_update + external_update)}
+                            """
+
+                        cursor.execute(slq_statement)
+
 
 def save_data(partition):
     conn = connect.value
 
     db_conn = psycopg2.connect(
-        host = conn.get("host"),
-        user = conn.get("user"),
-        password = conn.get("password"),
-        database = conn.get("database"),
+        host=conn.get("host"),
+        user=conn.get("user"),
+        password=conn.get("password"),
+        database=conn.get("database"),
     )
 
     cursor = db_conn.cursor()
@@ -144,6 +153,7 @@ def readMyStream(rdd):
         df = spark.read.json(y)
 
         df.foreachPartition(save_data)
+
 
 stream.foreachRDD(lambda rdd: readMyStream(rdd))
 ssc.start()
